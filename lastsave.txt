@@ -24,20 +24,37 @@
 +   i
 + }
 > B <- matrix(c(1,2,3,4),2,2)
-> solve(B)
-     [,1] [,2]
-[1,]   -2  1.5
-[2,]    1 -0.5
+> B1 <- makwCacheMatrix(B)
+Error in makwCacheMatrix(B) : could not find function "makwCacheMatrix"
 > B1 <- makeCacheMatrix(B)
+> B
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> B1
+$set
+function(y) {
+          x <<- y
+          i <<- NULL
+  }
+<environment: 0x00000152652375f0>
+
+$get
+function() x
+<environment: 0x00000152652375f0>
+
+$setinverse
+function(inverse) i <<- inverse
+<environment: 0x00000152652375f0>
+
+$getinverse
+function() i
+<environment: 0x00000152652375f0>
+
 > cacheSolve(B1)
      [,1] [,2]
 [1,]   -2  1.5
 [2,]    1 -0.5
-> B1 <- makeCacheMatrix(B)
-> save.image("C:\\Users\\MAHE\\Documents\\GitHub\\ProgrammingAssignment2\\Caching")
-> cacheSolve(B1) #inverse returned after computation
-     [,1] [,2]
-[1,]   -2  1.5
-[2,]    1 -0.5
-> save.image("C:\\Users\\MAHE\\Documents\\GitHub\\ProgrammingAssignment2\\AssignmentCaching")
+> cacheSolve(B)
+Error in x$getinverse : $ operator is invalid for atomic vectors
 > 
